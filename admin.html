@@ -3,28 +3,28 @@
 <head>
     <title>Admin Panel</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
-        .box { width: 300px; padding: 20px; border: 1px solid #ccc; }
-        input { width: 100%; margin-bottom: 10px; padding: 8px; }
-        button { width: 100%; padding: 10px; background: blue; color: white; border: none; }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f4; }
+        .box { width: 320px; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="box">
     <div id="loginSection">
-        <h3>Login</h3>
+        <h3>Admin Login</h3>
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
-       <button onclick="alert('Button clicked!'); login();">Login</button>
+        <button onclick="login()">Login</button>
     </div>
 
     <div id="adminSection" style="display:none;">
-        <h3>Add Shoe</h3>
-        <input type="text" id="title" placeholder="Title">
+        <h3>Add New Product</h3>
+        <input type="text" id="title" placeholder="Shoe Name">
         <input type="number" id="price" placeholder="Price">
         <input type="text" id="img" placeholder="Image URL">
-        <button onclick="addShoe()">Submit</button>
+        <button onclick="addShoe()">Add Product</button>
     </div>
 </div>
 
@@ -33,12 +33,13 @@
     const supabase = supabase.createClient('https://qryvixlfyzdaawjiryic.supabase.co', 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G');
 
     async function login() {
-        const { error } = await supabase.auth.signInWithPassword({
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value
-        });
-        if (error) alert(error.message);
-        else {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+            alert("Login Failed: " + error.message);
+        } else {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('adminSection').style.display = 'block';
             alert("Login Successful!");
@@ -46,13 +47,21 @@
     }
 
     async function addShoe() {
-        const { error } = await supabase.from('products').insert({
-            title: document.getElementById('title').value,
-            price: document.getElementById('price').value,
-            image_url: document.getElementById('img').value
-        });
-        if (error) alert(error.message);
-        else alert("Shoe Added!");
+        const title = document.getElementById('title').value;
+        const price = document.getElementById('price').value;
+        const img = document.getElementById('img').value;
+
+        const { error } = await supabase.from('products').insert([{ title, price, image_url: img }]);
+        
+        if (error) {
+            alert("Error: " + error.message);
+        } else {
+            alert("Shoe Added Successfully!");
+            // Form clear
+            document.getElementById('title').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('img').value = '';
+        }
     }
 </script>
 </body>
