@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KickCraze | Premium Sneaker & Streetwear Atelier</title>
+    <!-- Premium Hype-Culture Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HARDWARE-ACCELERATED MOVING MARQUEE BAR -->
+    <div class="luxury-announcement-bar" id="top-announcement-bar">
+        <div class="announcement-ticker-container">
+            <div class="marquee-scrolling-wrapper">
+                <span class="announcement-text">Free Shipping Above ₹2999  •  New Sneaker Drops Live  •  Secure Razorpay Payments  •  Easy Shipping Across India  •  Free Shipping Above ₹2999  •  New Sneaker Drops Live  •  Secure Razorpay Payments  •  Easy Shipping Across India</span>
+            </div>
+        </div>
+        <button class="close-announcement-btn" id="dismiss-announcement-trigger" aria-label="Dismiss Announcement">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- GLOBAL OVERLAY Layer (Used for Cart/Login Modals, NOT Search) -->
+    <div class="global-overlay" id="global-backdrop"></div>
+
+    <!-- STREETWEAR FIXED 3D GLASS NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Left Side: Hamburger Menu Trigger -->
+            <button class="nav-action-btn menu-toggle" id="mobile-menu-trigger" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+
+            <!-- Center Side: Premium Redesigned Streetwear Logo Wordmark -->
+            <div class="nav-logo">
+                <a href="#home" class="logo-3d-wordmark">
+                    <span class="logo-text-kick">KICK</span><span class="logo-text-craze">CRAZE<i class="fa-solid fa-bolt sneaker-speed-mark"></i></span>
+                </a>
+            </div>
+
+            <!-- Left Navigation Links (Desktop Inline Only) -->
+            <nav class="nav-menu" id="nav-navigation-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#shop" class="nav-link">Collection</a>
+                <a href="#arrivals" class="nav-link">New Drops</a>
+                <a href="#about" class="nav-link">Atelier</a>
+            </nav>
+
+            <!-- Right Side: Action Icons Configuration -->
+            <div class="nav-actions">
+                <button class="nav-action-btn" id="search-toggle-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="nav-action-btn" id="login-modal-trigger" aria-label="Account">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+                <div class="cart-trigger-icon" id="cart-drawer-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge-count" id="cart-badge-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOATING GLASS/3D SEARCH PANEL (NO BACKGROUND BLUR) -->
+        <div class="floating-search-panel-3d" id="search-dropdown-bar-node">
+            <div class="search-inner-input-box">
+                <input type="text" id="search-input-field" placeholder="Search hype sneakers, apparel or drops...">
+                <button class="search-close-embed-btn" id="search-close-embed-btn" aria-label="Close Search">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- LAYERED DEPTH HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="hero-blend-overlay"></div>
+        <div class="hero-wrapper-content layered-depth-effect">
+            <span class="hero-meta-tag"><i class="fa-solid fa-fire-flame-curved"></i> PRIVÉ DROPS ONLINE</span>
+            <h1 class="hero-display-title">STEP INTO THE HYPE</h1>
+            <p class="hero-editorial-summary">Premium sneakers. Street ready. Built for everyday flex.</p>
+            <div class="hero-button-group">
+                <a href="#shop" class="btn btn-hype-crimson btn-3d-shadow">Shop Sneakers</a>
+                <a href="#arrivals" class="btn btn-trans-white">New Drops</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND VALUE PROPOSITION -->
+    <section class="value-prop-section">
+        <div class="container grid-3 row-gap-gap">
+            <div class="prop-block">
+                <i class="fa-solid fa-certificate"></i>
+                <h3>100% Authenticity Verified</h3>
+                <p>Every single drop passes through our rigorous verification center before sealing.</p>
+            </div>
+            <div class="prop-block">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Limited Tier Allocations</h3>
+                <p>Constructed in strict numbers. Once a drop is completely exhausted, it will never reappear.</p>
+            </div>
+            <div class="prop-block">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Priority Insured Air Cargo</h3>
+                <p>Complimentary protected shipping inside our heavy matte triple-boxed safety cases.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDITORIAL NEW DROPS -->
+    <section id="arrivals" class="arrivals-editorial-section">
+        <div class="container">
+            <div class="luxury-section-heading text-center">
+                <span class="sub-label">THE NEXT VANGUARD</span>
+                <h2>The Street Editorial</h2>
+                <div class="luxury-accent-line"></div>
+            </div>
+            
+            <div class="grid-2 editorial-card-frame">
+                <div class="editorial-media-box">
+                    <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1200&q=85" alt="KickCraze Sneaker Editorial">
+                </div>
+                <div class="editorial-details-box">
+                    <span class="tag-meta">SERIES .01 / HYPE</span>
+                    <h3>The Carbon Tech Monolith</h3>
+                    <p>Designed with raw performance micro-mesh grids, responsive rubber chassis, and a profile optimized for pure kinetic energy transition. Handcrafted from premium technical nubuck composites.</p>
+                    <a href="#shop" class="btn btn-luxury-dark btn-3d-shadow">Explore Drops</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURATED MASTERPIECES CATALOGUE -->
+    <section id="shop" class="catalogue-section">
+        <div class="container">
+            <div class="luxury-section-heading text-center">
+                <span class="sub-label">THE ARCHIVE CATALOGUE</span>
+                <h2>Curated Masterpieces</h2>
+                <div class="luxury-accent-line"></div>
+            </div>
+
+            <!-- Pipeline Management Controls -->
+            <div class="catalogue-controls-pipeline">
+                <div class="category-tabs-group" id="category-filter-tabs">
+                    <button class="tab-filter-link active" data-filter="all">All Drops</button>
+                    <button class="tab-filter-link" data-filter="Bags">Bags</button>
+                    <button class="tab-filter-link" data-filter="Shoes">Sneakers</button>
+                    <button class="tab-filter-link" data-filter="Clothing">Clothing</button>
+                    <button class="tab-filter-link" data-filter="Accessories">Caps</button>
+                    <button class="tab-filter-link" data-filter="Fragrance">Fragrance</button>
+                </div>
+
+                <div class="sorting-pipeline-dropdown">
+                    <label for="sort-selector-dropdown">Sort Hierarchy: </label>
+                    <select id="sort-selector-dropdown">
+                        <option value="curated">KickCraze Curated</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Target Cards Container -->
+            <div class="luxury-products-grid" id="dynamic-products-injection-point">
+                <!-- System injects code here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGH-AROMA PREMIUM BANNER -->
+    <section class="immersive-brand-banner">
+        <div class="banner-dimmer"></div>
+        <div class="banner-inner-content">
+            <h2>The KickCraze Scent Signature</h2>
+            <p>Infused with heavy crushed raw amber, smoke-distilled leather chords, and metallic silver notes. Olfactory statements bottled for the streets.</p>
+            <a href="#shop" class="btn btn-hype-crimson btn-3d-shadow">Secure A Bottle</a>
+        </div>
+    </section>
+
+    <!-- ATELIER BRAND HERITAGE -->
+    <section id="about" class="heritage-atelier-section">
+        <div class="container grid-2 align-items-center">
+            <div class="heritage-copywriting">
+                <span class="sub-label">ATELIER EXECUTION</span>
+                <h2>Sartorial Footprints</h2>
+                <p>At KickCraze, we operate with a strict rejection of sub-par fast production. We view footwear and apparel not as temporary hype layers, but as high-grade architectural statements of personal identity and poise.</p>
+                <p>Every pattern template is tracked manually, and our technical standards prioritize certified premium composite leather structures across global design centers.</p>
+            </div>
+            <div class="heritage-media-wrapper">
+                <div class="media-accent-border"></div>
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=900&q=80" alt="Premium Shoe Assembly KickCraze" class="heritage-hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGH SOCIETY REVIEWS -->
+    <section class="connoisseur-reviews-section">
+        <div class="container">
+            <div class="luxury-section-heading text-center">
+                <span class="sub-label">STREET CRITIQUE</span>
+                <h2>The Feedback Loop</h2>
+                <div class="luxury-accent-line"></div>
+            </div>
+            <div class="grid-3 row-gap-gap">
+                <div class="luxury-review-card">
+                    <div class="review-stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-body">"The heavy triple reinforcement stitching on their signature sneakers rivals the custom handcrafted standard of elite bespoke workshops."</p>
+                    <span class="review-author">— Marcus V.</span>
+                </div>
+                <div class="luxury-review-card">
+                    <div class="review-stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-body">"The responsive midsole tech offers incredible comfort. They command immediate attention on the streets."</p>
+                    <span class="review-author">— Dev Shah</span>
+                </div>
+                <div class="luxury-review-card">
+                    <div class="review-stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-body">"Bespoke unboxing layers turn a digital purchase into an unmatched experience. Absolute flawless care."</p>
+                    <span class="review-author">— Elena Rostova</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEMBERS PRIVATE CIRCLE NEWSLETTER -->
+    <section class="private-circle-newsletter">
+        <div class="container text-center">
+            <h2>The KickCraze Inner Vault</h2>
+            <p>Register your private credentials below to secure premium launch invitations, custom early access queues, and dynamic drop notification matrices.</p>
+            <form class="luxury-inline-form-box" id="newsletter-form-submit">
+                <input type="email" placeholder="Enter your email address" required id="newsletter-email">
+                <button type="submit" class="newsletter-submit-trigger">Request Entry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- SECURE CART SIDEBAR DRAWER SYSTEM -->
+    <aside class="luxury-cart-drawer" id="cart-drawer-sidebar">
+        <div class="drawer-header-pane">
+            <h3>Bespoke Wardrobe Drawer</h3>
+            <button class="drawer-close-btn" id="close-cart-drawer-btn" aria-label="Close Drawer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="drawer-items-scroll-area" id="cart-items-injection-pane">
+            <p class="empty-drawer-notice">Your wardrobe drawer is empty.</p>
+        </div>
+        <div class="drawer-summary-footer-pane">
+            <div class="bill-calculation-matrix">
+                <div class="bill-row"><span>Subtotal:</span><span id="cart-matrix-subtotal">₹0</span></div>
+                <div class="bill-row"><span>Shipping:</span><span id="cart-matrix-shipping">₹0</span></div>
+                <div class="luxury-divider"></div>
+                <div class="summary-subtotal-row">
+                    <span>Total Payable</span>
+                    <span id="cart-total-numeric-value">₹0</span>
+                </div>
+            </div>
+            <p class="luxury-disclaimer-text">Orders above ₹2,999 qualify for complimentary premium air cargo shipping.</p>
+            <button class="btn btn-checkout-prime btn-3d-shadow" id="cart-checkout-action-btn">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <!-- ATELIER IDENTITY SECURE PORTAL WINDOW -->
+    <div class="identity-modal-window" id="login-identity-modal">
+        <button class="modal-close-trigger" id="close-identity-modal-btn" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-split-layout">
+            <div class="modal-branding-side">
+                <h3>KickCraze</h3>
+                <p>A secure gateway to personal curation, launch tracking ledger, and elite drop allocations.</p>
+            </div>
+            <div class="modal-form-side">
+                <div class="form-toggle-headers">
+                    <span class="form-toggle-link active" id="toggle-login-view">Secure Portal</span>
+                </div>
+                <form class="identity-actual-form" id="actual-auth-form">
+                    <div class="input-luxury-group">
+                        <label>Private Identity Email</label>
+                        <input type="email" required placeholder="name@domain.com">
+                    </div>
+                    <div class="input-luxury-group">
+                        <label>Password Code</label>
+                        <input type="password" required placeholder="••••••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-luxury-dark width-100-percent btn-3d-shadow">Grant Entry</button>
+                    <a href="#" class="forgot-credentials-link" onclick="event.preventDefault(); alert('Reset protocol dispatched via encrypted secure link.');">Forgot password passphrase?</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL POPUP MODAL SYSTEM (QUICK VIEW) -->
+    <div class="luxury-product-modal" id="product-detail-popup-modal">
+        <button class="product-modal-close-btn" id="close-product-modal-trigger" aria-label="Close Pop-up">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="product-modal-container">
+            <div class="product-modal-gallery">
+                <img src="" id="popup-product-img" alt="Product Specimen Image">
+            </div>
+            <div class="product-modal-details-pane">
+                <span class="popup-product-category" id="popup-product-category">CATEGORY</span>
+                <h2 class="popup-product-title" id="popup-product-title">Product Headline Title</h2>
+                
+                <div class="popup-rating-row">
+                    <div class="p-spec-stars" id="popup-product-stars-container"></div>
+                    <span class="verified-text">Authenticity Verified</span>
+                </div>
+
+                <p class="popup-product-price" id="popup-product-price">₹0.00</p>
+                <p class="popup-product-description" id="popup-product-description">Bespoke summary description goes here...</p>
+
+                <div class="popup-variants-wrapper" id="popup-size-variants-section">
+                    <h4 class="variant-heading-label">Select Proportion (UK Size)</h4>
+                    <div class="size-options-flex-row">
+                        <button class="size-variant-bubble active">7</button>
+                        <button class="size-variant-bubble">8</button>
+                        <button class="size-variant-bubble">9</button>
+                        <button class="size-variant-bubble">10</button>
+                    </div>
+                </div>
+
+                <div class="popup-variants-wrapper">
+                    <h4 class="variant-heading-label">Atelier Finish Colorway</h4>
+                    <div class="color-options-flex-row">
+                        <span class="color-variant-palette active" style="background-color: #111111;" title="Triple Onyx Black"></span>
+                        <span class="color-variant-palette" style="background-color: #d63031;" title="Crimson Red Hype"></span>
+                        <span class="color-variant-palette" style="background-color: #b2bec3;" title="Metallic Grey"></span>
+                    </div>
+                </div>
+
+                <div class="popup-purchase-action-row">
+                    <div class="quantity-selector-box">
+                        <button class="qty-math-trigger" id="qty-decrement-btn"><i class="fa-solid fa-minus"></i></button>
+                        <span class="qty-numerical-display" id="qty-numerical-display">1</span>
+                        <button class="qty-math-trigger" id="qty-increment-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <button class="btn btn-luxury-dark popup-add-to-cart-trigger-btn btn-3d-shadow" id="popup-add-to-cart-main-action">
+                        Allocate To Drawer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHIPPING ADDRESS FORM AND MODAL SPECIFICS -->
+    <div class="identity-modal-window checkout-address-modal" id="customer-checkout-address-modal">
+        <button class="modal-close-trigger" id="close-checkout-modal-btn" aria-label="Close Checkout"><i class="fa-solid fa-xmark"></i></button>
+        <div class="checkout-modal-inner-wrapper">
+            <div class="checkout-modal-header text-center">
+                <h3>Checkout</h3>
+                <div class="luxury-accent-line"></div>
+            </div>
+            
+            <form class="identity-actual-form checkout-grid-form" id="actual-checkout-shipping-form">
+                <div class="input-luxury-group">
+                    <label>Full Name</label>
+                    <input type="text" id="checkout-fullname" required placeholder="John Doe">
+                </div>
+                <div class="input-luxury-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="checkout-phone" required placeholder="98765 43210">
+                </div>
+                <div class="input-luxury-group span-full-width">
+                    <label>Email Address</label>
+                    <input type="email" id="checkout-email" required placeholder="name@domain.com">
+                </div>
+                <div class="input-luxury-group span-full-width">
+                    <label>Delivery Address</label>
+                    <input type="text" id="checkout-address" required placeholder="Flat, House no., Building, Street Block">
+                </div>
+                <div class="input-luxury-group">
+                    <label>City</label>
+                    <input type="text" id="checkout-city" required placeholder="Ranchi">
+                </div>
+                <div class="input-luxury-group">
+                    <label>State</label>
+                    <input type="text" id="checkout-state" required placeholder="Jharkhand">
+                </div>
+                <div class="input-luxury-group span-full-width">
+                    <label>Pincode</label>
+                    <input type="text" id="checkout-pincode" required placeholder="834001">
+                </div>
+                
+                <div class="checkout-final-invoice-card span-full-width">
+                    <div class="bill-row"><span>Subtotal</span><span id="invoice-subtotal">₹0</span></div>
+                    <div class="bill-row"><span>Shipping</span><span id="invoice-shipping">₹0</span></div>
+                    <div class="luxury-divider" style="background-color: rgba(255,255,255,0.15);"></div>
+                    <div class="bill-row final-grand-row"><span>Total Payable</span><span id="invoice-grandtotal">₹0</span></div>
+                </div>
+
+                <button type="submit" class="btn btn-hype-crimson width-100-percent span-full-width checkout-submit-btn btn-3d-shadow">
+                    Continue to Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PREMIUM STREETWEAR BRAND SYSTEM FOOTER -->
+    <footer class="luxury-editorial-footer" id="footer">
+        <div class="container grid-4">
+            <div class="footer-brand-profile-block">
+                <h2>KickCraze</h2>
+                <p class="footer-tagline">Premium Sneakers. Street Ready. Built for everyday flex. Assembled with absolute raw kinetic power, architectural sole matrices, and curated limits for true street culture connoisseurs.</p>
+                <div class="luxury-social-row">
+                    <a href="#" aria-label="Instagram Handle Connect"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest Space Archive"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#" aria-label="Threads Profile Ledger"><i class="fa-brands fa-threads"></i></a>
+                </div>
+            </div>
+            <div class="footer-navigation-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home Base</a></li>
+                    <li><a href="#shop">The Archive Catalogue</a></li>
+                    <li><a href="#arrivals">New Hype Drops</a></li>
+                    <li><a href="#about">Our Heritage Atelier</a></li>
+                </ul>
+            </div>
+            <div class="footer-navigation-column">
+                <h3>Legal Policies</h3>
+                <ul>
+                    <li><a href="#" onclick="event.preventDefault(); togglePolicyDisplay('Shipping Policy');">Shipping Policy</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); togglePolicyDisplay('Return & Refund Policy');">Return & Refund Policy</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); togglePolicyDisplay('Privacy Policy');">Privacy Policy</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); togglePolicyDisplay('Terms & Conditions');">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-navigation-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-contact-specs">
+                    <li><i class="fa-solid fa-envelope"></i> vault@kickcraze.in</li>
+                    <li><i class="fa-brands fa-whatsapp"></i> +91 651 299901</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Ranchi Atelier Hub, JH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright-subline text-center">
+            <p>&copy; 2026 KickCraze S.p.A. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- POLICY DYNAMIC DETAILED MODAL LAYER -->
+    <div class="identity-modal-window policy-view-modal" id="policy-display-popup-modal">
+        <button class="modal-close-trigger" id="close-policy-modal-trigger" aria-label="Close Policy Modal Display Window"><i class="fa-solid fa-xmark"></i></button>
+        <div class="policy-modal-inner-wrapper">
+            <h3 id="policy-modal-title">Policy Guideline</h3>
+            <div class="luxury-accent-line" style="margin: 15px 0 20px 0;"></div>
+            <div class="policy-modal-scrollable-body" id="policy-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- INTEGRATED RAZORPAY INSTANT FRAME LAYER WEB CHECKOUT ENGINE -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- JavaScript Injection Line -->
+    <script src="script.js"></script>
+</body>
+</html>
