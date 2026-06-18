@@ -2,54 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KickCraze Admin Panel</title>
+    <title>KickCraze Admin Login</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; padding: 40px; max-width: 500px; margin: auto; background-color: #f4f4f9; }
-        h2 { color: #333; text-align: center; }
-        input, textarea { display: block; width: 100%; margin: 15px 0; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        button:hover { background: #218838; }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f9; }
+        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 350px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        #adminForm { display: none; }
     </style>
 </head>
 <body>
-    <h2>Add New Shoe Product</h2>
-    <input type="text" id="title" placeholder="Product Title">
-    <input type="number" id="price" placeholder="Price">
-    <input type="text" id="image_url" placeholder="Image URL">
-    <textarea id="description" placeholder="Description" rows="4"></textarea>
-    <button onclick="addProduct()">Add Product</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabaseUrl = 'https://qryvixlfyzdaawjiryic.supabase.co';
-        const supabaseAnonKey = 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G'; 
-        
-        const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+<div class="box">
+    <div id="loginForm">
+        <h2>Admin Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
 
-        async function addProduct() {
-            const title = document.getElementById('title').value;
-            const price = parseInt(document.getElementById('price').value);
-            const image_url = document.getElementById('image_url').value;
-            const description = document.getElementById('description').value;
+    <div id="adminForm">
+        <h2>Add Product</h2>
+        <input type="text" id="title" placeholder="Title">
+        <input type="number" id="price" placeholder="Price">
+        <input type="text" id="image_url" placeholder="Image URL">
+        <textarea id="description" placeholder="Description" style="width:100%"></textarea>
+        <button onclick="addProduct()" style="margin-top:10px;">Add Product</button>
+    </div>
+</div>
 
-            if(!title || !price) { alert("Please fill title and price"); return; }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabase = supabase.createClient('https://qryvixlfyzdaawjiryic.supabase.co', 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G');
 
-            const { data, error } = await supabase.from('products').insert([
-                { title, price, image_url, description }
-            ]);
+    async function login() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) alert("Login Fail: " + error.message);
+        else { document.getElementById('loginForm').style.display = 'none'; document.getElementById('adminForm').style.display = 'block'; }
+    }
 
-            if (error) {
-                alert('Error: ' + error.message);
-            } else {
-                alert('Product added successfully!');
-                // Form clear kar do
-                document.getElementById('title').value = '';
-                document.getElementById('price').value = '';
-                document.getElementById('image_url').value = '';
-                document.getElementById('description').value = '';
-            }
-        }
-    </script>
+    async function addProduct() {
+        const { error } = await supabase.from('products').insert([{ 
+            title: document.getElementById('title').value,
+            price: parseInt(document.getElementById('price').value),
+            image_url: document.getElementById('image_url').value,
+            description: document.getElementById('description').value
+        }]);
+        if (error) alert("Error: " + error.message);
+        else alert('Success!');
+    }
+</script>
 </body>
 </html>
