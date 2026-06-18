@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KickCraze Admin Panel</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 40px; max-width: 500px; margin: auto; background-color: #f4f4f9; }
+        h2 { color: #333; text-align: center; }
+        input, textarea { display: block; width: 100%; margin: 15px 0; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <h2>Add New Shoe Product</h2>
+    <input type="text" id="title" placeholder="Product Title">
+    <input type="number" id="price" placeholder="Price">
+    <input type="text" id="image_url" placeholder="Image URL">
+    <textarea id="description" placeholder="Description" rows="4"></textarea>
+    <button onclick="addProduct()">Add Product</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://qryvixlfyzdaawjiryic.supabase.co';
+        const supabaseAnonKey = 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G'; 
+        
+        const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        async function addProduct() {
+            const title = document.getElementById('title').value;
+            const price = parseInt(document.getElementById('price').value);
+            const image_url = document.getElementById('image_url').value;
+            const description = document.getElementById('description').value;
+
+            if(!title || !price) { alert("Please fill title and price"); return; }
+
+            const { data, error } = await supabase.from('products').insert([
+                { title, price, image_url, description }
+            ]);
+
+            if (error) {
+                alert('Error: ' + error.message);
+            } else {
+                alert('Product added successfully!');
+                // Form clear kar do
+                document.getElementById('title').value = '';
+                document.getElementById('price').value = '';
+                document.getElementById('image_url').value = '';
+                document.getElementById('description').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
