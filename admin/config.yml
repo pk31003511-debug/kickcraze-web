@@ -1,8 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: pk31003511-debug/kickcraze-web # Apki GitHub repo ka naam
   branch: master
 
-media_folder: "images" # Jahan product photos upload hongi
+media_folder: "images"
 public_folder: "images"
 
 collections:
