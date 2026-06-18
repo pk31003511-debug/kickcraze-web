@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>KickCraze Admin Login</title>
+    <title>Admin Panel</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f9; }
-        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 350px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
-        #adminForm { display: none; }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
+        .box { width: 300px; padding: 20px; border: 1px solid #ccc; }
+        input { width: 100%; margin-bottom: 10px; padding: 8px; }
+        button { width: 100%; padding: 10px; background: blue; color: white; border: none; }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <div id="loginForm">
-        <h2>Admin Login</h2>
+    <div id="loginSection">
+        <h3>Login</h3>
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
     </div>
 
-    <div id="adminForm">
-        <h2>Add Product</h2>
+    <div id="adminSection" style="display:none;">
+        <h3>Add Shoe</h3>
         <input type="text" id="title" placeholder="Title">
         <input type="number" id="price" placeholder="Price">
-        <input type="text" id="image_url" placeholder="Image URL">
-        <textarea id="description" placeholder="Description" style="width:100%"></textarea>
-        <button onclick="addProduct()" style="margin-top:10px;">Add Product</button>
+        <input type="text" id="img" placeholder="Image URL">
+        <button onclick="addShoe()">Submit</button>
     </div>
 </div>
 
@@ -36,22 +33,26 @@
     const supabase = supabase.createClient('https://qryvixlfyzdaawjiryic.supabase.co', 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G');
 
     async function login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) alert("Login Fail: " + error.message);
-        else { document.getElementById('loginForm').style.display = 'none'; document.getElementById('adminForm').style.display = 'block'; }
+        const { error } = await supabase.auth.signInWithPassword({
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        });
+        if (error) alert(error.message);
+        else {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('adminSection').style.display = 'block';
+            alert("Login Successful!");
+        }
     }
 
-    async function addProduct() {
-        const { error } = await supabase.from('products').insert([{ 
+    async function addShoe() {
+        const { error } = await supabase.from('products').insert({
             title: document.getElementById('title').value,
-            price: parseInt(document.getElementById('price').value),
-            image_url: document.getElementById('image_url').value,
-            description: document.getElementById('description').value
-        }]);
-        if (error) alert("Error: " + error.message);
-        else alert('Success!');
+            price: document.getElementById('price').value,
+            image_url: document.getElementById('img').value
+        });
+        if (error) alert(error.message);
+        else alert("Shoe Added!");
     }
 </script>
 </body>
