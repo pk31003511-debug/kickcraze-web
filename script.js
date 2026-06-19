@@ -553,11 +553,16 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
                     const vRes = await fetch("/.netlify/functions/verify-payment", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            order_id: payload.razorpay_order_id,
-                            payment_id: payload.razorpay_payment_id,
-                            signature: payload.razorpay_signature
-                        })
+                       body: JSON.stringify({
+    order_id: payload.razorpay_order_id,
+    payment_id: payload.razorpay_payment_id,
+    signature: payload.razorpay_signature,
+    customer: JSON.parse(localStorage.getItem("kickcraze_customer_cache") || "{}"),
+    cart_items: internalCartState,
+    subtotal,
+    shipping,
+    total: totalAmount
+})
                     });
                     const vData = await vRes.json();
 
