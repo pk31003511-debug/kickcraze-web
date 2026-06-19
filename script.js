@@ -8,7 +8,7 @@ const KICKCRAZE_CATALOGUE = [
         id: 1,
         name: "Aurelia Midnight Sneaker",
         category: "Shoes",
-        price: 185000,
+        price: 18,
         rating: 5,
         description: "Exquisitely structured silhouette sneaker assembled with premium raw technical matte overlays, neon crimson highlights, reactive runtime gel arches, and heavy reinforced ballistic nylon base matrix threads.",
         image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
