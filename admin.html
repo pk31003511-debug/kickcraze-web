@@ -1,68 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Panel</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f4; }
-        .box { width: 320px; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input { width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KickCraze Admin</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f3f3;color:#111}.login-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#050505,#1c1c1c)}.login-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.35)}.brand{font-size:28px;font-weight:900;letter-spacing:1px;margin:0 0 6px}.brand span{color:#e01822}.muted{color:#707070;margin:0 0 24px}label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;margin-bottom:8px}input,select,textarea{width:100%;border:1px solid #e6e6e6;border-radius:10px;padding:13px 14px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}.field{margin-bottom:16px}button{border:0;border-radius:10px;padding:13px 16px;font-weight:900;cursor:pointer;background:#070707;color:#fff}.red{background:#e01822}.light{background:#fff;color:#111;border:1px solid #e6e6e6}.error{color:#e01822;font-weight:700;min-height:22px}.app{display:none}.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:16px;padding:18px 28px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid #e6e6e6}.topbar h1{margin:0;font-size:22px}.actions{display:flex;gap:10px}.container{max-width:1280px;margin:auto;padding:28px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.card,.panel{background:#fff;border:1px solid #e6e6e6;border-radius:16px;box-shadow:0 14px 36px rgba(0,0,0,.06)}.card{padding:18px}.card p{margin:0 0 8px;color:#707070;font-size:12px;font-weight:800;text-transform:uppercase}.card strong{font-size:28px}.panel{overflow:hidden}.panel-head{display:grid;grid-template-columns:1fr 180px 120px;gap:12px;padding:16px;border-bottom:1px solid #e6e6e6}.table-wrap{overflow-x:auto}table{width:100%;min-width:980px;border-collapse:collapse}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #e6e6e6;vertical-align:top}th{background:#fafafa;font-size:12px;text-transform:uppercase}.pill{display:inline-flex;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:900;background:#eee}.pill.paid,.pill.delivered{background:rgba(15,159,110,.12);color:#0f9f6e}.pill.shipped,.pill.packed{background:rgba(0,88,255,.1);color:#0058ff}.pill.cancelled{background:rgba(224,24,34,.12);color:#e01822}.empty{padding:38px;text-align:center;color:#707070}.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:50;padding:24px;overflow-y:auto}.modal{width:min(820px,100%);margin:40px auto;background:#fff;border-radius:18px;overflow:hidden}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #e6e6e6}.modal-head h2{margin:0}.modal-body{padding:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{background:#f5f5f5;border-radius:12px;padding:14px}.box small{display:block;color:#707070;font-weight:800;text-transform:uppercase;margin-bottom:5px}.items{display:grid;gap:10px;margin:14px 0 20px}.item{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid #e6e6e6;border-radius:12px}.full{grid-column:1/-1}@media(max-width:760px){.topbar,.actions{flex-direction:column}.stats{grid-template-columns:1fr 1fr}.panel-head,.grid{grid-template-columns:1fr}.container{padding:16px}.actions button{width:100%}}
+  </style>
 </head>
 <body>
-
-<div class="box">
-    <div id="loginSection">
-        <h3>Admin Login</h3>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Login</button>
+  <section class="login-screen" id="login-screen">
+    <div class="login-card">
+      <h1 class="brand">KICK <span>CRAZE</span></h1>
+      <p class="muted">Order command center</p>
+      <div class="field"><label>Admin Password</label><input type="password" id="admin-password" placeholder="Enter admin password"></div>
+      <button class="red" id="login-btn" style="width:100%">Login</button>
+      <p class="error" id="login-error"></p>
     </div>
-
-    <div id="adminSection" style="display:none;">
-        <h3>Add New Product</h3>
-        <input type="text" id="title" placeholder="Shoe Name">
-        <input type="number" id="price" placeholder="Price">
-        <input type="text" id="img" placeholder="Image URL">
-        <button onclick="addShoe()">Add Product</button>
+  </section>
+  <main class="app" id="admin-app">
+    <header class="topbar">
+      <div><h1>KickCraze Admin</h1><p class="muted" style="margin:4px 0 0">Orders, payments and shipping status</p></div>
+      <div class="actions"><button class="light" id="refresh-btn">Refresh</button><button id="logout-btn">Logout</button></div>
+    </header>
+    <div class="container">
+      <section class="stats">
+        <div class="card"><p>Total Orders</p><strong id="stat-total-orders">0</strong></div>
+        <div class="card"><p>Paid Orders</p><strong id="stat-paid-orders">0</strong></div>
+        <div class="card"><p>Revenue</p><strong id="stat-revenue">₹0</strong></div>
+        <div class="card"><p>To Ship</p><strong id="stat-to-ship">0</strong></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head">
+          <input id="search-input" placeholder="Search name, phone, email, order number">
+          <select id="status-filter"><option value="all">All statuses</option><option>Paid</option><option>Packed</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select>
+          <button class="red" id="clear-filters">Clear</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Payment</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody id="orders-body"></tbody></table>
+          <div class="empty" id="empty-state">No orders found.</div>
+        </div>
+      </section>
     </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    const supabase = supabase.createClient('https://qryvixlfyzdaawjiryic.supabase.co', 'sb_publishable_foN7QwGkf4XsnRee0ZGNWg_LJNkna2G');
-
-    async function login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) {
-            alert("Login Failed: " + error.message);
-        } else {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('adminSection').style.display = 'block';
-            alert("Login Successful!");
-        }
-    }
-
-    async function addShoe() {
-        const title = document.getElementById('title').value;
-        const price = document.getElementById('price').value;
-        const img = document.getElementById('img').value;
-
-        const { error } = await supabase.from('products').insert([{ title, price, image_url: img }]);
-        
-        if (error) {
-            alert("Error: " + error.message);
-        } else {
-            alert("Shoe Added Successfully!");
-            // Form clear
-            document.getElementById('title').value = '';
-            document.getElementById('price').value = '';
-            document.getElementById('img').value = '';
-        }
-    }
-</script>
+  </main>
+  <div class="modal-backdrop" id="order-modal"><div class="modal"><div class="modal-head"><h2 id="modal-title">Order details</h2><button class="light" id="close-modal">Close</button></div><div class="modal-body" id="modal-body"></div></div></div>
+  <script>
+    const INR=new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0});let adminPassword=sessionStorage.getItem("kickcraze_admin_password")||"";let orders=[];let activeOrder=null;
+    const loginScreen=document.getElementById("login-screen"),adminApp=document.getElementById("admin-app"),loginBtn=document.getElementById("login-btn"),loginError=document.getElementById("login-error"),passwordInput=document.getElementById("admin-password"),ordersBody=document.getElementById("orders-body"),emptyState=document.getElementById("empty-state"),searchInput=document.getElementById("search-input"),statusFilter=document.getElementById("status-filter"),modal=document.getElementById("order-modal"),modalBody=document.getElementById("modal-body"),modalTitle=document.getElementById("modal-title");
+    function showApp(){loginScreen.style.display="none";adminApp.style.display="block"}
+    async function loadOrders(){const r=await fetch("/.netlify/functions/get-orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({adminPassword})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not load orders");orders=d.orders||[];renderStats();renderOrders()}
+    function renderStats(){const total=orders.length,paid=orders.filter(o=>(o.payment_status||"").toLowerCase()==="paid").length,revenue=orders.reduce((s,o)=>s+Number(o.total||0),0),toShip=orders.filter(o=>["Paid","Packed"].includes(o.order_status)).length;document.getElementById("stat-total-orders").textContent=total;document.getElementById("stat-paid-orders").textContent=paid;document.getElementById("stat-revenue").textContent=INR.format(revenue);document.getElementById("stat-to-ship").textContent=toShip}
+    function filteredOrders(){const term=searchInput.value.trim().toLowerCase(),status=statusFilter.value;return orders.filter(o=>{const hay=[o.order_number,o.customer_name,o.phone,o.email,o.razorpay_order_id,o.razorpay_payment_id].join(" ").toLowerCase();return(!term||hay.includes(term))&&(status==="all"||o.order_status===status)})}
+    function renderOrders(){const rows=filteredOrders();emptyState.style.display=rows.length?"none":"block";ordersBody.innerHTML=rows.map(o=>`<tr><td><strong>${esc(o.order_number||"-")}</strong><br><small>${esc(o.razorpay_payment_id||"")}</small></td><td>${esc(o.customer_name||"-")}<br><small>${esc(o.phone||"")}</small></td><td><strong>${INR.format(Number(o.total||0))}</strong></td><td><span class="pill paid">${esc(o.payment_status||"paid")}</span></td><td><span class="pill ${(o.order_status||"").toLowerCase()}">${esc(o.order_status||"Paid")}</span></td><td>${fmt(o.created_at)}</td><td><button class="light" onclick="openOrder('${o.id}')">View</button></td></tr>`).join("")}
+    window.openOrder=id=>{activeOrder=orders.find(o=>o.id===id);if(!activeOrder)return;const items=Array.isArray(activeOrder.cart_items)?activeOrder.cart_items:[];modalTitle.textContent=activeOrder.order_number||"Order details";modalBody.innerHTML=`<div class="grid"><div class="box"><small>Customer</small>${esc(activeOrder.customer_name||"-")}<br>${esc(activeOrder.phone||"")}<br>${esc(activeOrder.email||"")}</div><div class="box"><small>Address</small>${esc(activeOrder.address||"")}<br>${esc(activeOrder.city||"")}, ${esc(activeOrder.state||"")} - ${esc(activeOrder.pincode||"")}</div><div class="box"><small>Payment</small>${esc(activeOrder.razorpay_payment_id||"-")}<br>Total: ${INR.format(Number(activeOrder.total||0))}</div><div class="box"><small>Shipping</small>${esc(activeOrder.tracking_number||"No tracking added yet")}</div></div><h3>Items</h3><div class="items">${items.map(i=>`<div class="item"><span>${esc(i.name||i.title||"Product")} x ${Number(i.quantity||1)}</span><strong>${INR.format(Number(i.price||0)*Number(i.quantity||1))}</strong></div>`).join("")||"<p>No item data found.</p>"}</div><div class="grid"><div class="field"><label>Status</label><select id="edit-status">${["Paid","Packed","Shipped","Delivered","Cancelled"].map(s=>`<option ${activeOrder.order_status===s?"selected":""}>${s}</option>`).join("")}</select></div><div class="field"><label>Tracking Number</label><input id="edit-tracking" value="${attr(activeOrder.tracking_number||"")}" placeholder="Courier tracking number"></div><div class="field full"><label>Admin Note</label><textarea id="edit-note" placeholder="Internal note">${esc(activeOrder.note||"")}</textarea></div><button class="red full" onclick="saveOrderUpdate()">Save order update</button></div>`;modal.style.display="block"};
+    window.saveOrderUpdate=async()=>{if(!activeOrder)return;const r=await fetch("/.netlify/functions/update-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({adminPassword,id:activeOrder.id,order_status:document.getElementById("edit-status").value,tracking_number:document.getElementById("edit-tracking").value,note:document.getElementById("edit-note").value})});const d=await r.json();if(!r.ok){alert(d.error||"Could not update order");return}orders[orders.findIndex(o=>o.id===activeOrder.id)]=d.order;activeOrder=d.order;renderStats();renderOrders();alert("Order updated.");modal.style.display="none"};
+    function fmt(v){return v?new Date(v).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}):"-"}function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}function attr(v){return esc(v).replace(/`/g,"&#096;")}
+    loginBtn.addEventListener("click",async()=>{adminPassword=passwordInput.value.trim();loginError.textContent="";if(!adminPassword){loginError.textContent="Enter admin password.";return}try{loginBtn.textContent="Loading...";loginBtn.disabled=true;await loadOrders();sessionStorage.setItem("kickcraze_admin_password",adminPassword);showApp()}catch(e){loginError.textContent=e.message}finally{loginBtn.textContent="Login";loginBtn.disabled=false}});
+    passwordInput.addEventListener("keydown",e=>{if(e.key==="Enter")loginBtn.click()});document.getElementById("refresh-btn").addEventListener("click",loadOrders);document.getElementById("logout-btn").addEventListener("click",()=>{sessionStorage.removeItem("kickcraze_admin_password");location.reload()});document.getElementById("close-modal").addEventListener("click",()=>modal.style.display="none");modal.addEventListener("click",e=>{if(e.target===modal)modal.style.display="none"});searchInput.addEventListener("input",renderOrders);statusFilter.addEventListener("change",renderOrders);document.getElementById("clear-filters").addEventListener("click",()=>{searchInput.value="";statusFilter.value="all";renderOrders()});if(adminPassword){loadOrders().then(showApp).catch(()=>sessionStorage.removeItem("kickcraze_admin_password"))}
+  </script>
 </body>
 </html>
