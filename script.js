@@ -3,7 +3,7 @@
    ========================================================================== */
 
 // 1. SNEAKER CATALOGUE MASTER INVENTORY
-const KICKCRAZE_CATALOGUE = [
+let KICKCRAZE_CATALOGUE = [
     {
         id: 1,
         name: "Aurelia Midnight Sneaker",
@@ -675,7 +675,29 @@ document.getElementById("newsletter-form-submit").addEventListener("submit", (e)
 });
 
 // App Startup Bootstrapper
-document.addEventListener("DOMContentLoaded", () => {
+async function loadKickCrazeProductsFromBackend() {
+    try {
+        const response = await fetch("/.netlify/functions/get-products");
+        if (!response.ok) throw new Error("Product backend unavailable");
+
+        const data = await response.json();
+        if (!data.products || data.products.length === 0) return;
+
+        KICKCRAZE_CATALOGUE = data.products.map(product => ({
+            id: product.id,
+            name: product.title,
+            category: product.category || "Shoes",
+            price: Number(product.price || 0),
+            rating: Number(product.rating || 5),
+            description: product.description || "",
+            image: product.image_url || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+        }));
+    } catch (error) {
+        console.warn("Using fallback hardcoded products:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadKickCrazeProductsFromBackend();
     compileProductsDisplay(KICKCRAZE_CATALOGUE);
-    refreshBagInterface();
 });
