@@ -531,7 +531,7 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
         checkoutSubmitButton.textContent = "Processing...";
         checkoutSubmitButton.disabled = true;
 
-        const res = await fetch("/.netlify/functions/create-order", {
+        const res = await fetch("/api/create-order", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: totalAmount })
@@ -550,7 +550,7 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
             handler: async function (payload) {
                 try {
                     checkoutSubmitButton.textContent = "Verifying...";
-                    const vRes = await fetch("/.netlify/functions/verify-payment", {
+                    const vRes = await fetch("/api/verify-payment", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                        body: JSON.stringify({
@@ -677,7 +677,7 @@ document.getElementById("newsletter-form-submit").addEventListener("submit", (e)
 // App Startup Bootstrapper
 async function loadKickCrazeProductsFromBackend() {
     try {
-        const response = await fetch("/.netlify/functions/get-products");
+        const response = await fetch("/api/get-products")
         if (!response.ok) throw new Error("Product backend unavailable");
 
         const data = await response.json();
