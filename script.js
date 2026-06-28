@@ -700,4 +700,80 @@ async function loadKickCrazeProductsFromBackend() {
 document.addEventListener("DOMContentLoaded", async () => {
     await loadKickCrazeProductsFromBackend();
     compileProductsDisplay(KICKCRAZE_CATALOGUE);
+    setupProductVoiceTriggers();
 });
+// =======================================================
+// KICK CRAZE: PREMIUM ENGLISH VOICE ASSISTANT CODE
+// =======================================================
+
+// STEP 1: Voice Engine (Premium English Accent)
+function speakMessage(text) {
+    if ('speechSynthesis' in window) {
+        window.currentKickCrazeAudio = null; // Clean any audio reference
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.0;  // Natural speed
+        utterance.pitch = 1.0; // Professional tone
+        utterance.lang = 'en-US'; // Premium English accent
+
+        // Try to find a high-quality English voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const premiumVoice = voices.find(voice => voice.lang === 'en-US' && voice.name.includes('Google'));
+        if (premiumVoice) utterance.voice = premiumVoice;
+
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+// Ensure voices are fully loaded in the browser
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+    };
+}
+
+// STEP 2: Welcome Trigger (Sophisticated English Welcome)
+window.addEventListener('click', function welcomeUser() {
+    if (!localStorage.getItem('returningCustomer')) {
+        
+        speakMessage("Welcome to India's own branded shoes website.");
+        
+        localStorage.setItem('returningCustomer', 'true');
+    }
+    window.removeEventListener('click', welcomeUser);
+});
+
+// STEP 3: Smart Product Scroll (Classy English Phrases)
+function setupProductVoiceTriggers() {
+    const productCards = document.querySelectorAll('.product-card'); 
+    let productTimer;
+    
+    // Premium & attractive phrases for high engagement
+    const smartPhrases = [
+        "Great taste! This is one of our most exclusive pairs.",
+        "Excellent pick! These kicks are designed to make you stand out.",
+        "You have a great eye for style. This is a perfect choice."
+    ];
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.6 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Trigger after 10 seconds of focused scrolling/viewing
+                productTimer = setTimeout(() => {
+                    const randomPhrase = smartPhrases[Math.floor(Math.random() * smartPhrases.length)];
+                    speakMessage(randomPhrase);
+                }, 10000); 
+            } else {
+                clearTimeout(productTimer);
+            }
+        });
+    }, observerOptions);
+
+    productCards.forEach(card => observer.observe(card));
+}
