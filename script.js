@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    KICKCRAZE ENGINE ARCHITECTURE 2026 | PRODUCTION DATASHEET & INTERACTIONS
    ========================================================================== */
 
@@ -420,9 +420,9 @@ function refreshBagInterface() {
 
     if (internalCartState.length === 0) {
         cartItemsInjectionPane.innerHTML = `<p class="empty-drawer-notice">Your wardrobe drawer is empty.</p>`;
-        cartMatrixSubtotal.textContent = "₹0";
-        cartMatrixShipping.textContent = "₹0";
-        cartTotalNumericValue.textContent = "₹0";
+        cartMatrixSubtotal.textContent = "â‚¹0";
+        cartMatrixShipping.textContent = "â‚¹0";
+        cartTotalNumericValue.textContent = "â‚¹0";
         return;
     }
 
@@ -522,7 +522,7 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
     const checkoutSubmitButton = actualCheckoutShippingForm.querySelector(".checkout-submit-btn");
     const originalButtonText = checkoutSubmitButton.textContent;
     
-    const subtotalText = document.getElementById("invoice-subtotal").innerText.replace(/[₹,]/g, '');
+    const subtotalText = document.getElementById("invoice-subtotal").innerText.replace(/[â‚¹,]/g, '');
     const subtotal = parseInt(subtotalText);
     const shipping = subtotal >= 2999 ? 0 : 99;
     const totalAmount = subtotal + shipping;
@@ -531,7 +531,7 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
         checkoutSubmitButton.textContent = "Processing...";
         checkoutSubmitButton.disabled = true;
 
-        const res = await fetch("/api/create-order", {
+        const res = await fetch("/.netlify/functions/create-order", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: totalAmount })
@@ -550,7 +550,7 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
             handler: async function (payload) {
                 try {
                     checkoutSubmitButton.textContent = "Verifying...";
-                    const vRes = await fetch("/api/verify-payment", {
+                    const vRes = await fetch("/.netlify/functions/verify-payment", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                        body: JSON.stringify({
@@ -599,17 +599,17 @@ actualCheckoutShippingForm.addEventListener("submit", async (event) => {
 const KICKCRAZE_POLICIES = {
     "Shipping Policy": `
         <h4>1. Dispatch Timeline</h4>
-        <p>All premium sneakers and limited streetwear allocations are processed and dispatched within 24–48 business hours from our central authentication warehouse ledger hub.</p>
+        <p>All premium sneakers and limited streetwear allocations are processed and dispatched within 24â€“48 business hours from our central authentication warehouse ledger hub.</p>
         
         <h4>2. Shipping Charges Across India</h4>
-        <p>• Orders valuing ₹2,999 and above qualify for complimentary priority air-cargo dispatch.<br>
-        • Orders below ₹2,999 incur a standardized secure packaging and fulfillment fee of ₹99 across all states in India.</p>
+        <p>â€¢ Orders valuing â‚¹2,999 and above qualify for complimentary priority air-cargo dispatch.<br>
+        â€¢ Orders below â‚¹2,999 incur a standardized secure packaging and fulfillment fee of â‚¹99 across all states in India.</p>
         
         <h4>3. Delivery Carriers & Tracking</h4>
         <p>We partner with high-tier premium couriers (BlueDart, Delhivery, Delhivery Air) to guarantee fast transport. Secure encrypted tracking URLs will send straight to your email register immediately upon carrier scan lines execution.</p>
         
         <h4>4. Transit Boundaries</h4>
-        <p>Standard delivery spans 2–5 business days for major Indian metro hubs (Delhi, Mumbai, Bangalore, Kolkata, Ranchi) and up to 5–7 days for smaller regional pins.</p>
+        <p>Standard delivery spans 2â€“5 business days for major Indian metro hubs (Delhi, Mumbai, Bangalore, Kolkata, Ranchi) and up to 5â€“7 days for smaller regional pins.</p>
     `,
     "Return & Refund Policy": `
         <h4>1. 7-Day Inspection Loop</h4>
@@ -619,11 +619,11 @@ const KICKCRAZE_POLICIES = {
         <p>Certain special limited-allocation tier drops, customized high-aroma perfumes, and capsule street apparel collections cannot accept return logs due to market rarity constraints. Please review item labels carefully during launch window periods.</p>
         
         <h4>3. Refund Issuance System</h4>
-        <p>Once your returned specimen passes through our intake verification center check logs, approval triggers automatic gateway clearance lines. Refunds route instantly to your original payment ledger instrument via Razorpay within 3–5 professional banking clearance cycles. Cash-on-Delivery alternatives adjust via secured direct IMPS/NEFT ledger transfers.</p>
+        <p>Once your returned specimen passes through our intake verification center check logs, approval triggers automatic gateway clearance lines. Refunds route instantly to your original payment ledger instrument via Razorpay within 3â€“5 professional banking clearance cycles. Cash-on-Delivery alternatives adjust via secured direct IMPS/NEFT ledger transfers.</p>
     `,
     "Privacy Policy": `
         <h4>1. Information Capture Matrix</h4>
-        <p>We capture secure personal identifiers provided by your input channels—specifically Full Names, mobile contact phone streams, shipping address rows, and private email registers—purely to execute fulfillment protocol lines.</p>
+        <p>We capture secure personal identifiers provided by your input channelsâ€”specifically Full Names, mobile contact phone streams, shipping address rows, and private email registersâ€”purely to execute fulfillment protocol lines.</p>
         
         <h4>2. Encryption Safeguards</h4>
         <p>KickCraze utilizes industrial-grade Secure Socket Layer (SSL) matrices to protect database files. Under no circumstances do our system caches log, parse, or hold your credit card passphrases, internet banking credentials, or wallet security tokens.</p>
@@ -677,7 +677,7 @@ document.getElementById("newsletter-form-submit").addEventListener("submit", (e)
 // App Startup Bootstrapper
 async function loadKickCrazeProductsFromBackend() {
     try {
-        const response = await fetch("/api/get-products")
+        const response = await fetch("/.netlify/functions/get-products")
         if (!response.ok) throw new Error("Product backend unavailable");
 
         const data = await response.json();
